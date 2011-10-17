@@ -6,14 +6,19 @@
 (function($){
     function init(plot){
         var _visibleMode = false;
-        var _max;
         
         plot.autoScale = function(){
             var opts = plot.getYAxes()[0].options;
+            var data = plot.getData();
+            var max = 0;
 
+            $.each(data, function(index, s) {
+                max = Math.max(max, autoScale(plot, s, s.data, s.datapoints));
+            });
+            
             if (_visibleMode) {
                 opts.min = 0;
-                opts.max = _max;
+                opts.max = max;
             }
             plot.setupGrid();
             plot.draw();
@@ -27,14 +32,13 @@
         function checkAutoScaleMode(plot, options){
             if (options.yaxis.scaleMode == "visible") {
                 _visibleMode = true;
-                plot.hooks.processRawData.push(autoScale);
             }
         }
         
         function autoScale(plot, series, data, datapoints){
             _max = Number.NEGATIVE_INFINITY;
             var options = plot.getOptions();
-
+            
             // limit to visible serie
             if (series.lines.show || series.points.show) {
                 var max = Number.NEGATIVE_INFINITY;
@@ -44,7 +48,7 @@
                 }
                 
                 max += max * options.yaxis.autoscaleMargin * 10;
-                _max = Math.max(_max, max);
+                return Math.max(_max, max);
             }
         }
         

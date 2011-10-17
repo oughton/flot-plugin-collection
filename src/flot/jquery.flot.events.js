@@ -604,7 +604,7 @@
      */
     function VisualEvent(options, drawableEvent, level){
         var _parent, _options = options, _drawableEvent = drawableEvent,
-            _level = level, _hidden = false, _instances = [];
+            _level = level, _hidden = false;
         
         this.visual = function() { return _drawableEvent; }
         this.level = function() { return _level; };
