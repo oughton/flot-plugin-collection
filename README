@@ -10,3 +10,4 @@ List of plugins:
   * xgap - Automated x-axis gap insertion
   * selectseries - Selectable series
   * weekdaynames - Customised time period labels
+  * autoscale - Additional autoscale types
