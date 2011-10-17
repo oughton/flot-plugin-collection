@@ -2,6 +2,24 @@
  * Flot plugin for snapping the xaxis to predefined time ranges.
  *
  * @author Joel Oughton
+ *
+ * This plugin adds four public functions to the flot API
+ *  > nextRange, prevRange, now and snapTo
+ *
+ *  Each of these function take two of the same parameters: range and xNum.
+ *
+ *  xNum = the xaxis number (0, 1, 2, ...)
+ *    in most cases this will be 0 unless you have multiple xaxis'
+ *
+ *  range = the time range for snapping.
+ *    possible values are: hour, day, week, month or year
+ *
+ *  eg.
+ *        nextRange("week", 0)  - will move the xaxis time range to
+ *                                one week in the future.
+ *
+ *        now("day", 0)         - will snap the time range to the start
+ *                                of the current day (midnight).
  */
 (function($){
     function init(plot) {
