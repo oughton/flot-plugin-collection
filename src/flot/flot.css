@@ -1,0 +1,58 @@
+.navButton {
+    position: absolute;
+    cursor: pointer;
+}
+div.navButton {
+    font-size: smaller;
+    color: #999;
+    background-color: #eee;
+    padding: 2px;
+}
+.message {
+    padding-left: 50px;
+    font-size: smaller;
+}
+
+#slider { 
+    margin: 10px; 
+}
+
+.tickLabel { font-size: 80% }
+
+.flotgraph {
+	width:675px;
+	height:250px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 4px;
+	cursor:move;
+}
+
+.flotgraph div {
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+.flotgraph table {
+	width: auto;
+}
+
+#tooltip {
+    position: absolute;
+    display: none;
+    width: 300px;
+    border: 1px solid #fdd;
+    padding: 2px;
+    background-color: #fee;
+    opacity: 0.80;
+    font-size: smaller;
+    cursor:move;
+}
+
+#tooltip #title {
+    font-weight: bold;
+}
+
+#tooltip #type {
+    font-style: italic;
+}

@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Tests</title>
+	<script language="javascript" type="text/javascript" src="../src/jquery-1.4.min.js"></script>
+	<script language="javascript" type="text/javascript" src="../src/flot/jquery.flot.js"></script>
+	<script language="javascript" type="text/javascript" src="../src/flot/jquery.flot.selection.js"></script>
+	<script language="javascript" type="text/javascript" src="../src/flot/jquery.flot.navigate.js"></script>
+	<script language="javascript" type="text/javascript" src="../src/flot/jquery.flot.xgap.js"></script>
+	<script language="javascript" type="text/javascript" src="../src/flot/jquery.flot.autoscale.js"></script>
+	<script language="javascript" type="text/javascript" src="../src/flot/jquery.flot.cacher.js"></script>
+  
+  <script type="text/javascript" src="http://github.com/jquery/qunit/raw/master/qunit/qunit.js"></script>
+  
+  <link rel="stylesheet" href="http://github.com/jquery/qunit/raw/master/qunit/qunit.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="../src/flot/flot.css" type="text/css"/>
+  
+  <script language="javascript" type="text/javascript" src="../src/jsNavGraph.js"></script>
+	<script language="javascript" type="text/javascript" src="../src/NavGraphController.js"></script>
+	
+	<script language="javascript" type="text/javascript" src="TestDatasets.js"></script>
+  
+   <script>
+  $(document).ready(function(){
+
+module("Flot Tests");
+
+test("test flot availability", function() {
+  $("#output").append("<div id='flot-test1' style='width:600px;height:300px;'></div>");
+	var plot = $.plot($("#flot-test1"), [[ [1,0], [2,1], [3,3], [4,1] ]]);
+  ok(plot != undefined, "Test that the flot object has been returned");
+});
+
+module("NavGraph Tests");
+
+test("New nav graph", function() {
+  //expect(2);
+  //equals( true, false, "failing test" );
+	$("#output").append("<div id='navgraph-test1' style='width:600px;height:300px;'></div>");
+	 
+	var options = {
+		nav: {
+			drawNavControls: true
+		}
+	}
+	
+	var navGraph = new NavGraph(
+		$("#navgraph-test1"),
+		{ 
+			zoom: { interactive: true, amount: 1.25 },
+			pan: { interactive: true, frameRate: 40},
+			xaxis: { min: 0, max: 10 },
+			yaxis: { zoomRange: [0, 0], scaleMode: "visible" },
+			legend: { position: "nw", noColumns: 5 },
+			caching: { 
+				enabled: true, binSizeMin: 0, tzOffset: 0,
+				dataFunction: sinDataFunctionTest, urlFunction: sinUrlFunctionTest
+			}
+		},
+		options
+	);
+
+	navGraph.enableNavControls();
+	navGraph.disableNavControls();
+	navGraph.enableNavControls();
+	
+	setTimeout(function() { navGraph.getController().autoScale() }, 500);
+	
+  equals( true, true, "passing test" );
+});
+
+  });
+  </script>
+
+</head>
+
+<body>
+
+	<h1 id="qunit-header">QUnit example</h1>
+	<h2 id="qunit-banner"></h2>
+  <h2 id="qunit-userAgent"></h2>
+  <ol id="qunit-tests"></ol>
+  <div id ="output"></div>
+</body>
+</html>

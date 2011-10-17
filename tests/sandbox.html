@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>All Tests</title>
+	<script language="javascript" type="text/javascript" src="../src/jquery-1.4.min.js"></script>
+	<script language="javascript" type="text/javascript" src="../src/flot/jquery.flot.js"></script>
+	<script language="javascript" type="text/javascript" src="../src/flot/jquery.flot.selection.js"></script>
+	<script language="javascript" type="text/javascript" src="../src/flot/jquery.flot.navigate.js"></script>
+	<script language="javascript" type="text/javascript" src="../src/flot/jquery.flot.xgap.js"></script>
+	<script language="javascript" type="text/javascript" src="../src/flot/jquery.flot.cacher.js"></script>
+	<script language="javascript" type="text/javascript" src="../src/flot/jquery.flot.autoscale.js"></script>
+	<script language="javascript" type="text/javascript" src="../src/flot/jquery.flot.selectseries.js"></script>
+	<script language="javascript" type="text/javascript" src="../src/NavGraphController.js"></script>
+	<script language="javascript" type="text/javascript" src="../src/jsNavGraph.js"></script>
+	<script language="javascript" type="text/javascript" src="../src/AmpLineView.js"></script>
+  
+  <script type="text/javascript" src="http://github.com/jquery/qunit/raw/master/qunit/qunit.js"></script>
+  
+  <link rel="stylesheet" href="http://github.com/jquery/qunit/raw/master/qunit/qunit.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="../src/flot/flot.css" type="text/css"/>
+
+</head>
+<body>
+
+<div id ="container" style="width:600px;height:400px;"></div>
+<script type="text/javascript">
+$(document).ready(function(){
+	var d1 = [[0, 3], [4, 8], [8, 5], [9, 13]];
+	var d2 = [[0, 6], [4, 16], [8, 10], [9, 26]];
+	
+	var series = [
+		{ data: d1, label: "Line 1" },
+		{ data: d2, label: "Line 2" }
+	];
+	
+	var options = {
+		grid: { hoverable: true }
+	};
+	
+	var container = $('#container');
+	$.plot(container, series, options);
+	
+	var colorBoxes = container.find('.legendColorBox');
+	var legendLabels = container.find('.legendLabel');
+	
+	colorBoxes.each(function(index, value) {
+		// determine the width based of unique seies labels?
+	
+		$(this).find('div').each(function(index, value) {
+			// there are two div's - one for the border and one for the fill
+		})
+		);
+	});
+	
+	container.bind("plothover", function (event, pos) {
+		container.find('#track').html();
+	});
+});
+
+</script>
+</body>
+</html>
