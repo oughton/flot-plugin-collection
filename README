@@ -1,1 +1,12 @@
 This is a small collection of flot plugins that I developed as part of a summer project that made use of the flot library.
+
+List of plugins:
+
+  * heatmap - Heatmap graph type
+  * events - Event Graphic System
+  * snap - Easy time series navigation
+  * cacher - Data Cacher
+  * axislabels - Axis labels using Raphael.js
+  * xgap - Automated x-axis gap insertion
+  * selectseries - Selectable series
+  * weekdaynames - Customised time period labels
