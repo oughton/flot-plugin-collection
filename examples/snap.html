@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Snap-to-Range Example</title>
+	<script language="javascript" type="text/javascript" src="../src/jquery-1.4.min.js"></script>
+	<script language="javascript" type="text/javascript" src="../src/flot/jquery.flot.js"></script>
+	<script language="javascript" type="text/javascript" src="../src/flot/constants.js"></script>
+	<script language="javascript" type="text/javascript" src="../src/flot/jquery.flot.snap.js"></script>
+	<script language="javascript" type="text/javascript" src="../src/date.js"></script>
+
+	<script language="javascript" type="text/javascript" src="data.js"></script>
+</head>
+
+<body>
+
+<script language="javascript" type="text/javascript">
+$(document).ready(function() {
+  var plot,
+      container = $('#plot'), // plot container
+      ui = $('#ui'),          // buttons container
+      periods = [ 'day' ],    // time periods
+      period = periods[0];    // in use time period
+
+  // create the ui buttons
+  var createUI = function(container, period, periods) {
+    createButton('<< prev ' + period)
+      .appendTo(container)
+      .click(function() {
+        plot && plot.prevRange(period, 0);
+      });
+    
+    createButton('next ' + period + ' >>')
+      .appendTo(container)
+      .click(function() {
+        plot && plot.nextRange(period, 0);
+      });
+  };
+
+  // create a buttos
+  var createButton = function(text) {
+    return $('<button>' + text + '</button>');
+  };
+
+  var init = function() {
+    var data = [];
+
+    var options = {
+      xaxis: {
+        mode: 'time',
+        max: 1320019200000,
+        min: 1319932800000,
+
+        // New Zealand Time Zone Offset in MS
+        // If this value is not specified then UTC time is used
+        tzOffset: 46800000
+      }
+    }
+
+    // generate data
+    for (var i = 1319514000000; i < 1320724000000; i += 300000) {
+      data.push([i, $generate.sin(i / 10000000)]);
+    }
+
+    // plot the graph
+    plot = $.plot(container, [ data ], options);
+
+    // create the ui buttons
+    createUI(ui, period, periods);
+  };
+
+  init();
+});
+</script>
+
+<div id="plot" style="width:600px;height:200px;"></div>
+<div id="ui" style="width:600px;height:100px;"></div>
+</body>
+</html>
