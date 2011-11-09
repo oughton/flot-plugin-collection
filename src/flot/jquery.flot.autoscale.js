@@ -47,7 +47,6 @@
     
     $.plot.plugins.push({
         init: init,
-        options: options,
         name: "autoscalemode",
         version: "0.5"
     });
