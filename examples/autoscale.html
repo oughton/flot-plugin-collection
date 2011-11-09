@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Autoscale Example</title>
+	<script language="javascript" type="text/javascript" src="../src/jquery-1.4.min.js"></script>
+	<script language="javascript" type="text/javascript" src="../src/flot/jquery.flot.js"></script>
+	<script language="javascript" type="text/javascript" src="../src/flot/jquery.flot.autoscale.js"></script>
+
+	<script language="javascript" type="text/javascript" src="data.js"></script>
+</head>
+
+<body>
+
+<script language="javascript" type="text/javascript">
+$(document).ready(function() {
+  var plot,
+      container = $('#plot'),
+      btnHide = $('#btnHide'), 
+      btnAutoScale = $('#btnAutoScale'), 
+      s1 = { data: [] }, s2 = { data: [], lines: { show: true } },
+      options = {},
+      series = [ s1, s2 ];
+
+  // hides the top series
+  btnHide.click(function() {
+    s2.lines.show = !s2.lines.show;
+    plot = $.plot(container, series, options);
+  });
+
+  // calls the custom autscale function
+  btnAutoScale.click(function() {
+    plot.autoScale();
+  });
+
+  // generate 2 data series
+  for (var i = 0; i < 1000; i += 1) {
+    s1.data.push([i, 2 + $generate.sin(i / 10)]);
+    s2.data.push([i, 5 + $generate.sin(i / 10)]);
+  }
+
+  // plot the graph
+  plot = $.plot(container, series, options);
+});
+</script>
+
+<div id="plot" style="width:600px;height:200px;"></div>
+<button id="btnHide">Hide Top Series</button>
+<button id="btnAutoScale">Autoscale</button>
+</body>
+</html>
