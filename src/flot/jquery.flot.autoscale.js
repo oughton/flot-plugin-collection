@@ -28,7 +28,7 @@
         }
         
         function autoScale(plot, series, data, datapoints){
-            _max = Number.NEGATIVE_INFINITY;
+            var _max = Number.NEGATIVE_INFINITY;
             var options = plot.getOptions();
             
             // limit to visible serie
@@ -41,6 +41,8 @@
                 
                 max += max * options.yaxis.autoscaleMargin * 10;
                 return Math.max(_max, max);
+            } else {
+              return 0;
             }
         }
     }
