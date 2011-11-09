@@ -5,7 +5,6 @@
  */
 (function($){
     function init(plot){
-        var _visibleMode = false;
         
         plot.autoScale = function(){
             var opts = plot.getYAxes()[0].options;
@@ -16,10 +15,9 @@
                 max = Math.max(max, autoScale(plot, s, s.data, s.datapoints));
             });
             
-            if (_visibleMode) {
-                opts.min = 0;
-                opts.max = max;
-            }
+            opts.min = 0;
+            opts.max = max;
+            
             plot.setupGrid();
             plot.draw();
             
@@ -27,12 +25,6 @@
                 min: opts.min,
                 max: opts.max
             };
-        }
-        
-        function checkAutoScaleMode(plot, options){
-            if (options.yaxis.scaleMode == "visible") {
-                _visibleMode = true;
-            }
         }
         
         function autoScale(plot, series, data, datapoints){
@@ -51,20 +43,12 @@
                 return Math.max(_max, max);
             }
         }
-        
-        plot.hooks.processOptions.push(checkAutoScaleMode);
     }
-    
-    var options = {
-        yaxis: {
-            scaleMode: null
-        }
-    };
     
     $.plot.plugins.push({
         init: init,
         options: options,
         name: "autoscalemode",
-        version: "0.4"
+        version: "0.5"
     });
 })(jQuery);
