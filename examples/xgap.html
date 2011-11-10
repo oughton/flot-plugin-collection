@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>X Gap Threshold Example</title>
+	<script language="javascript" type="text/javascript" src="../src/jquery-1.4.min.js"></script>
+	<script language="javascript" type="text/javascript" src="../src/flot/jquery.flot.js"></script>
+	<script language="javascript" type="text/javascript" src="../src/flot/jquery.flot.xgap.js"></script>
+
+	<script language="javascript" type="text/javascript" src="data.js"></script>
+</head>
+
+<body>
+
+<script language="javascript" type="text/javascript">
+$(document).ready(function() {
+  var plot,
+      container = $('#plot'),
+      options = {},
+      s1 = { data: [] };
+
+  // generate data series
+  for (var i = 0; i < 1000; i += 0.5) {
+    if (i < 500 || i > 750) s1.data.push([i, 2 + $generate.sin(i / 20)]);
+  }
+
+  // enable gap insertion and set the color of the gap
+  options.xaxis = {
+    insertGaps: true,
+    gapColor: 'rgba(255,0,0,0.2)'
+  }
+
+  // set the maximum grab before breaking the line
+  s1.xGapThresh = 0.5;
+
+  // plot the graph
+  plot = $.plot(container, [ s1 ], options);
+});
+</script>
+
+<div id="plot" style="width:600px;height:200px;"></div>
+</body>
+</html>
