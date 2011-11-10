@@ -21,13 +21,16 @@ $(document).ready(function() {
 
   // generate data series
   for (var i = 0; i < 1000; i += 0.5) {
-    if (i < 500 || i > 750) s1.data.push([i, 2 + $generate.sin(i / 20)]);
+    // add some gaps
+    if ((i < 500 || i > 750) && (i < 150 || i > 200)) {
+      s1.data.push([i, 2 + $generate.sin(i / 30)]);
+    }
   }
 
   // enable gap insertion and set the color of the gap
   options.xaxis = {
     insertGaps: true,
-    gapColor: 'rgba(255,0,0,0.2)'
+    gapColor: 'rgba(255,0,0,0.15)'
   }
 
   // set the maximum grab before breaking the line
