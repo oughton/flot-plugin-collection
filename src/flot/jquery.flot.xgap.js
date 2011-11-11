@@ -1,6 +1,25 @@
 /**
  * Flot plugin for adding gaps to the line in a line graph when a certain x threashold has been reached.
  *
+ * Usage:
+ *
+ * To configure this plugin, values must be added to two areas.
+ * 
+ * The first is in the global x-axis options:
+ * xaxis: {
+ *   insertGaps: true,  // enable or disable this plugin
+ *   gapColor: rgba(100,100,100,0.2) // the color to use for gaps - undefined is no indication
+ * }
+ *
+ * The second is in the series object for a set of data.
+ * var series1 = {
+ *   data: [ ... ],
+ *   label: 'Series 1',
+ *   xGapThresh: 300 // A value of 300 here indicates that a x-gap > 300 will insert a gap
+ * }
+ *
+ * Enjoy!
+ *
  * @author Joel Oughton
  */
 (function($){
