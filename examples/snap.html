@@ -16,13 +16,13 @@
 <script language="javascript" type="text/javascript">
 $(document).ready(function() {
   var plot,
-      container = $('#plot'), // plot container
-      ui = $('#ui'),          // buttons container
-      periods = [ 'day' ],    // time periods
-      period = periods[0];    // in use time period
+      container = $('#plot'),                         // plot container
+      ui = $('#ui'),                                  // buttons container
+      periods = [ 'hour', 'day', 'week', 'year' ],    // time periods
+      period = periods[1];                            // the default time period unit - day
 
   // create the ui buttons
-  var createUI = function(container, period, periods) {
+  var createUI = function(container, period) {
     createButton('<< prev ' + period)
       .appendTo(container)
       .click(function() {
@@ -65,7 +65,15 @@ $(document).ready(function() {
     plot = $.plot(container, [ data ], options);
 
     // create the ui buttons
-    createUI(ui, period, periods);
+    createUI(ui, period);
+
+    $('#snapSelect').change(function() {
+      var value = this.options[this.selectedIndex].value;
+      ui.empty();
+      createUI(ui, periods[periods.indexOf(value)]);
+      plot.snapTo(value, 0);
+    });
+
   };
 
   init();
@@ -73,6 +81,17 @@ $(document).ready(function() {
 </script>
 
 <div id="plot" style="width:600px;height:200px;"></div>
-<div id="ui" style="width:600px;height:100px;"></div>
+
+Snap Unit: 
+<select id="snapSelect">
+    <option value="hour">Hour</option>
+    <option value="day" selected="selected">Day</option>
+    <option value="week">Week</option>
+    <option value="year">Year</option>
+</select>
+
+<div id="ui" style="width:600px;height:100px;">
+</div>
+</div>
 </body>
 </html>
