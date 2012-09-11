@@ -146,7 +146,7 @@ return((r[1].length===0)?r[0]:null);};};Date.parseExact=function(s,fx){return Da
         
         var _snap = function(range, axis, startDate) {
             var end, hour, month, year;
-            switch (range) {
+            switch (range.toLowerCase()) {
                 case "hour":
                     // go to the start of the hour
                     hour = startDate.getHours();
@@ -205,7 +205,7 @@ return((r[1].length===0)?r[0]:null);};};Date.parseExact=function(s,fx){return Da
             if (direction == "left") dir = -1;
             else dir = 1;
 
-            switch (range) {
+            switch (range.toLowerCase()) {
                 case "hour":
                     hour = startDate.getHours();
                     startDate.clearTime().addHours(hour + dir);
