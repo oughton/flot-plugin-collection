@@ -67,10 +67,17 @@ $(document).ready(function() {
     // create the ui buttons
     createUI(ui, period);
 
+    // add the select event
     $('#snapSelect').change(function() {
       var value = this.options[this.selectedIndex].value;
+
+      // clear the ui buttons
       ui.empty();
+
+      // redraw the buttons with the currently selected time period
       createUI(ui, periods[periods.indexOf(value)]);
+      
+      // redraw the plot for the current time period
       plot.snapTo(value, 0);
     });
 
